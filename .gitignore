@@ -92,7 +92,6 @@ alerts.log
 *.local.log
 
 # ---- Misc ----
-*.log
 *.tmp
 *.bak
 *.swp
