@@ -1,0 +1,136 @@
+<div id="app"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/iconfont/tabler-icons.min.css"></script>
+<script>
+const MODULES = [
+  { id: "m0", name: "Module 0 — From C to C#", items: [
+    ["00-01", "Hello C#"], ["00-02", "Variables, Types & Operators"], ["00-03", "Control Flow"],
+    ["00-04", "Methods & Parameters"], ["00-05", "Arrays & Strings"], ["00-06", "Classes & Objects"],
+    ["00-07", "Intro to Collections"],
+  ]},
+  { id: "m1", name: "Module 1 — Foundations", items: [
+    ["01", "Value vs Reference Types"], ["01a", "Records and Immutability"], ["02", "Nullable Types"],
+    ["03", "Boxing and Unboxing"], ["04", "Pattern Matching"], ["05", "Expression-Bodied Members"],
+  ]},
+  { id: "m2", name: "Module 2 — OOP Deep Dive", items: [
+    ["06", "Encapsulation"], ["07", "Inheritance vs Composition"], ["08", "Polymorphism & LSP"],
+    ["09", "Interfaces vs Abstract Classes"], ["10", "SOLID Principles"],
+  ]},
+  { id: "m3", name: "Module 3 — Generics, Collections, LINQ", items: [
+    ["11", "Generics"], ["12", "Choosing the Right Collection"], ["13", "LINQ & Deferred Execution"],
+    ["14", "IQueryable vs IEnumerable"],
+  ]},
+  { id: "m4", name: "Module 4 — Delegates, Errors, Resources", items: [
+    ["15", "Delegates, Func/Action, Events"], ["16", "Exception Handling"], ["17", "IDisposable & Memory"],
+  ]},
+  { id: "m5", name: "Module 5 — Async & Concurrency", items: [
+    ["18", "async/await Fundamentals"], ["19", "Deadlocks, Cancellation, async void"],
+    ["19a", "Multithreading & Locks"], ["19b", "unsafe Pointers & Span<T>"],
+  ]},
+  { id: "m6", name: "Module 6 — Networking & I/O", items: [
+    ["20", "HttpClient Done Right"], ["21", "Raw Sockets & TCP"], ["22", "File I/O"],
+    ["22a", "Secure Coding Fundamentals"],
+  ]},
+  { id: "cap", name: "Capstone", items: [
+    ["23", "Concurrent URL Health Checker"],
+  ]},
+  { id: "m7", name: "Module 7 — Real-World Engineering", items: [
+    ["24", "Testing with xUnit"], ["25", "Dependency Injection & Configuration"], ["26", "Solution & Project Structure"],
+  ]},
+  { id: "proj", name: "Projects", items: [
+    ["p1", "Password Strength & Pattern Auditor"], ["p2", "Log Threat Hunter"], ["p3", "Encrypted Vault CLI"],
+    ["p4", "Async Port & Banner Scanner"], ["p5", "Live Log Correlator"], ["p6", "Grand Capstone: Password Manager"],
+  ]},
+];
+
+const TOTAL = MODULES.reduce((sum, m) => sum + m.items.length, 0);
+const STORAGE_KEY = "csharp-course-progress";
+let completed = new Set();
+let loaded = false;
+
+async function loadProgress() {
+  try {
+    const result = await window.storage.get(STORAGE_KEY, false);
+    if (result && result.value) completed = new Set(JSON.parse(result.value));
+  } catch (e) {
+    completed = new Set();
+  }
+  loaded = true;
+  render();
+}
+
+async function saveProgress() {
+  try {
+    await window.storage.set(STORAGE_KEY, JSON.stringify([...completed]), false);
+  } catch (e) {
+    console.error("Could not save progress", e);
+  }
+}
+
+function toggle(id) {
+  if (completed.has(id)) completed.delete(id); else completed.add(id);
+  saveProgress();
+  render();
+}
+
+function resetAll() {
+  completed = new Set();
+  saveProgress();
+  render();
+}
+
+function render() {
+  const app = document.getElementById("app");
+  const doneCount = completed.size;
+  const pct = TOTAL === 0 ? 0 : Math.round((doneCount / TOTAL) * 100);
+
+  let html = `
+    <h2 class="sr-only">C# course progress tracker: ${doneCount} of ${TOTAL} items completed, ${pct} percent</h2>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; flex-wrap:wrap; gap:12px;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="background:var(--surface-1); border-radius:var(--radius); padding:1rem 1.25rem; min-width:140px;">
+          <p style="font-size:13px; color:var(--text-secondary); margin:0 0 4px;">Overall progress</p>
+          <p style="font-size:24px; font-weight:500; margin:0;">${pct}%</p>
+          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0;">${doneCount} of ${TOTAL} completed</p>
+        </div>
+      </div>
+      <button onclick="resetAll()" style="width:auto; padding:0 16px;"><i class="ti ti-refresh" style="font-size:16px; vertical-align:-2px; margin-right:6px;" aria-hidden="true"></i>Reset progress</button>
+    </div>
+    <div style="height:8px; background:var(--surface-1); border-radius:4px; overflow:hidden; margin-bottom:2rem;">
+      <div style="height:100%; width:${pct}%; background:var(--fill-accent); border-radius:4px; transition:width 0.3s;"></div>
+    </div>
+  `;
+
+  for (const mod of MODULES) {
+    const modDone = mod.items.filter(([id]) => completed.has(id)).length;
+    const modPct = Math.round((modDone / mod.items.length) * 100);
+    html += `
+      <div style="margin-bottom:1.5rem;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+          <p style="font-weight:500; font-size:15px; margin:0;">${mod.name}</p>
+          <p style="font-size:13px; color:var(--text-secondary); margin:0;">${modDone}/${mod.items.length}</p>
+        </div>
+        <div style="border:0.5px solid var(--border); border-radius:12px; overflow:hidden;">
+    `;
+    mod.items.forEach(([id, title], i) => {
+      const isDone = completed.has(id);
+      const borderTop = i === 0 ? "none" : "0.5px solid var(--border)";
+      html += `
+        <label style="display:flex; align-items:center; gap:10px; padding:10px 14px; cursor:pointer; border-top:${borderTop};">
+          <input type="checkbox" ${isDone ? "checked" : ""} onchange="toggle('${id}')" style="width:16px; height:16px; margin:0;" />
+          <span style="font-size:14px; ${isDone ? "color:var(--text-muted); text-decoration:line-through;" : "color:var(--text-primary);"}">${title}</span>
+        </label>
+      `;
+    });
+    html += `</div></div>`;
+  }
+
+  app.innerHTML = html;
+}
+
+// expose functions used by inline handlers
+window.toggle = toggle;
+window.resetAll = resetAll;
+
+loadProgress();
+</script>
