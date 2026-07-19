@@ -1,6 +1,269 @@
-<div id="app"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress Tracker — csharp-zero-to-hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0c0b;
+  --surface: #161412;
+  --surface-2: #1d1a16;
+  --border: #2a2724;
+  --border-bright: #3d3833;
+  --text: #ede4d3;
+  --text-dim: #a8a094;
+  --text-muted: #6e675e;
+  --accent: #e8763a;
+  --accent-bright: #ff8a4a;
+  --good: #8fa86b;
+  --bad: #c9645d;
+  --maxw: 800px;
+}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/iconfont/tabler-icons.min.css"></script>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+
+h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+h1 .accent { color: var(--accent); }
+
+.subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Overall Progress Card */
+.overall-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.stat-block .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.stat-block .value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.stat-block .value .pct { color: var(--accent); }
+
+.reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.reset-btn:hover {
+  border-color: var(--bad);
+  color: var(--bad);
+  background: rgba(201, 100, 93, 0.05);
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(232, 118, 58, 0.4);
+}
+
+/* Modules */
+.module {
+  margin-bottom: 32px;
+}
+
+.module-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.module-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.module-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.module-list {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task:hover {
+  background: var(--surface-2);
+}
+
+/* Hide native checkbox, use custom terminal style */
+.task input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border-bright);
+  border-radius: 4px;
+  background: var(--bg);
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.task input[type="checkbox"]:hover {
+  border-color: var(--accent);
+}
+
+.task input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #1a0f08;
+  font-size: 14px;
+  font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.task-label {
+  font-size: 14.5px;
+  color: var(--text);
+  transition: all 0.15s;
+}
+
+.task.done .task-label {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--border-bright);
+}
+
+footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+footer a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1><span class="accent">~/</span> progress-tracker</h1>
+    <p class="subtitle">// State is saved locally in your browser. No backend required.</p>
+  </header>
+
+  <div id="app"></div>
+
+  <footer>
+    <a href="https://github.com/kacem101/csharp-zero-to-hero-course">← Back to repository</a>
+  </footer>
+</div>
+
 <script>
 const MODULES = [
   { id: "m0", name: "Module 0 — From C to C#", items: [
@@ -46,37 +309,38 @@ const MODULES = [
 const TOTAL = MODULES.reduce((sum, m) => sum + m.items.length, 0);
 const STORAGE_KEY = "csharp-course-progress";
 let completed = new Set();
-let loaded = false;
 
-async function loadProgress() {
+function loadProgress() {
   try {
-    const result = await window.storage.get(STORAGE_KEY, false);
-    if (result && result.value) completed = new Set(JSON.parse(result.value));
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) completed = new Set(JSON.parse(saved));
   } catch (e) {
     completed = new Set();
   }
-  loaded = true;
   render();
 }
 
-async function saveProgress() {
+function saveProgress() {
   try {
-    await window.storage.set(STORAGE_KEY, JSON.stringify([...completed]), false);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
   } catch (e) {
     console.error("Could not save progress", e);
   }
 }
 
 function toggle(id) {
-  if (completed.has(id)) completed.delete(id); else completed.add(id);
+  if (completed.has(id)) completed.delete(id); 
+  else completed.add(id);
   saveProgress();
   render();
 }
 
 function resetAll() {
-  completed = new Set();
-  saveProgress();
-  render();
+  if (confirm("Reset all progress? This cannot be undone.")) {
+    completed = new Set();
+    saveProgress();
+    render();
+  }
 }
 
 function render() {
@@ -85,43 +349,44 @@ function render() {
   const pct = TOTAL === 0 ? 0 : Math.round((doneCount / TOTAL) * 100);
 
   let html = `
-    <h2 class="sr-only">C# course progress tracker: ${doneCount} of ${TOTAL} items completed, ${pct} percent</h2>
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; flex-wrap:wrap; gap:12px;">
-      <div style="display:flex; align-items:center; gap:16px;">
-        <div style="background:var(--surface-1); border-radius:var(--radius); padding:1rem 1.25rem; min-width:140px;">
-          <p style="font-size:13px; color:var(--text-secondary); margin:0 0 4px;">Overall progress</p>
-          <p style="font-size:24px; font-weight:500; margin:0;">${pct}%</p>
-          <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0;">${doneCount} of ${TOTAL} completed</p>
-        </div>
+    <div class="overall-card">
+      <div class="stat-block">
+        <div class="label">// OVERALL PROGRESS</div>
+        <div class="value"><span class="pct">${pct}%</span> <span style="font-size: 14px; color: var(--text-muted);">(${doneCount}/${TOTAL})</span></div>
       </div>
-      <button onclick="resetAll()" style="width:auto; padding:0 16px;"><i class="ti ti-refresh" style="font-size:16px; vertical-align:-2px; margin-right:6px;" aria-hidden="true"></i>Reset progress</button>
+      <button class="reset-btn" onclick="resetAll()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Reset
+      </button>
     </div>
-    <div style="height:8px; background:var(--surface-1); border-radius:4px; overflow:hidden; margin-bottom:2rem;">
-      <div style="height:100%; width:${pct}%; background:var(--fill-accent); border-radius:4px; transition:width 0.3s;"></div>
+    
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" style="width: ${pct}%;"></div>
     </div>
   `;
 
   for (const mod of MODULES) {
     const modDone = mod.items.filter(([id]) => completed.has(id)).length;
-    const modPct = Math.round((modDone / mod.items.length) * 100);
+    
     html += `
-      <div style="margin-bottom:1.5rem;">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-          <p style="font-weight:500; font-size:15px; margin:0;">${mod.name}</p>
-          <p style="font-size:13px; color:var(--text-secondary); margin:0;">${modDone}/${mod.items.length}</p>
+      <div class="module">
+        <div class="module-head">
+          <span class="module-name">${mod.name}</span>
+          <span class="module-count">${modDone}/${mod.items.length}</span>
         </div>
-        <div style="border:0.5px solid var(--border); border-radius:12px; overflow:hidden;">
+        <div class="module-list">
     `;
+    
     mod.items.forEach(([id, title], i) => {
       const isDone = completed.has(id);
-      const borderTop = i === 0 ? "none" : "0.5px solid var(--border)";
       html += `
-        <label style="display:flex; align-items:center; gap:10px; padding:10px 14px; cursor:pointer; border-top:${borderTop};">
-          <input type="checkbox" ${isDone ? "checked" : ""} onchange="toggle('${id}')" style="width:16px; height:16px; margin:0;" />
-          <span style="font-size:14px; ${isDone ? "color:var(--text-muted); text-decoration:line-through;" : "color:var(--text-primary);"}">${title}</span>
+        <label class="task ${isDone ? 'done' : ''}">
+          <input type="checkbox" ${isDone ? "checked" : ""} onchange="toggle('${id}')" />
+          <span class="task-label">${title}</span>
         </label>
       `;
     });
+    
     html += `</div></div>`;
   }
 
@@ -134,3 +399,5 @@ window.resetAll = resetAll;
 
 loadProgress();
 </script>
+</body>
+</html>

@@ -96,3 +96,6 @@ alerts.log
 *.bak
 *.swp
 *~
+# ---- Scripts ----
+regroup.sh
+regroup.ps1

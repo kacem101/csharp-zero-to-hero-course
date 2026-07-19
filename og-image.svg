@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="glow" cx="30%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#e8763a" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#e8763a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0d0c0b"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- top border accent -->
+  <rect x="0" y="0" width="1200" height="4" fill="#e8763a"/>
+
+  <!-- eyebrow -->
+  <line x1="80" y1="146" x2="112" y2="146" stroke="#e8763a" stroke-width="1"/>
+  <text x="124" y="151" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.5" fill="#e8763a">COURSE / FOR C &amp; DSA STUDENTS GOING SECURITY-FIRST</text>
+
+  <!-- title -->
+  <text x="78" y="240" font-family="JetBrains Mono, monospace" font-weight="700" font-size="64" letter-spacing="-1.5" fill="#ede4d3">C# from pointers</text>
+  <text x="78" y="312" font-family="JetBrains Mono, monospace" font-weight="700" font-size="64" letter-spacing="-1.5" fill="#ede4d3">to <tspan fill="#e8763a">production</tspan></text>
+
+  <!-- subtitle -->
+  <text x="80" y="368" font-family="Inter, sans-serif" font-size="21" fill="#a8a094">A hands-on C# course that starts from what you already know in C and DSA.</text>
+
+  <!-- stats row -->
+  <g font-family="JetBrains Mono, monospace">
+    <text x="80" y="470" font-size="44" font-weight="700" fill="#ede4d3">8</text>
+    <text x="80" y="498" font-size="13" letter-spacing="1" fill="#6e675e">// MODULES</text>
+
+    <text x="230" y="470" font-size="44" font-weight="700" fill="#ede4d3">37</text>
+    <text x="230" y="498" font-size="13" letter-spacing="1" fill="#6e675e">// LESSONS</text>
+
+    <text x="400" y="470" font-size="44" font-weight="700" fill="#ede4d3">6</text>
+    <text x="400" y="498" font-size="13" letter-spacing="1" fill="#6e675e">// PROJECTS</text>
+
+    <text x="550" y="470" font-size="44" font-weight="700" fill="#ede4d3">34</text>
+    <text x="550" y="498" font-size="13" letter-spacing="1" fill="#6e675e">// SELF-CHECK TESTS</text>
+  </g>
+
+  <!-- bottom-right repo path -->
+  <text x="1120" y="580" font-family="JetBrains Mono, monospace" font-size="15" fill="#6e675e" text-anchor="end">kacem101/csharp-zero-to-hero-course</text>
+
+  <!-- bottom border accent -->
+  <rect x="0" y="626" width="1200" height="4" fill="#e8763a"/>
+</svg>

@@ -1,4 +1,4 @@
-# C# Zero to Hero — Practice Course
+﻿# C# Zero to Hero — Practice Course
 
 New here? Read [COURSE_SUMMARY.md](COURSE_SUMMARY.md) first — why C#, what's
 in the course, and how to actually stick with it. Then open
@@ -32,59 +32,59 @@ xUnit test project, and Lesson 26 is a CLI walkthrough rather than a
 single file. Both are noted in their own `INSTRUCTIONS.md`.)
 
 ## Module 0 — From C to C# (start here if you're new to C#)
-- [00.1 - Hello C#: Project Structure & the Console](lessons/00-01-hello-csharp/README.md)
-- [00.2 - Variables, Types & Operators: the C# vs C Cheat Sheet](lessons/00-02-variables-types-operators/README.md)
-- [00.3 - Control Flow: if/else, Loops, switch](lessons/00-03-control-flow/README.md)
-- [00.4 - Methods & Parameters: ref/out vs C Pointers](lessons/00-04-methods-parameters/README.md)
-- [00.5 - Arrays & Strings: the Safety Nets You Didn't Have in C](lessons/00-05-arrays-strings/README.md)
-- [00.6 - Classes & Objects: From C structs to C# Objects](lessons/00-06-classes-objects/README.md)
-- [00.7 - Intro to Collections: List<T> as a Safer, Growable Array](lessons/00-07-collections-intro/README.md)
+- [00.1 - Hello C#: Project Structure & the Console](lessons/00-from-c-to-csharp/00-01-hello-csharp/README.md)
+- [00.2 - Variables, Types & Operators: the C# vs C Cheat Sheet](lessons/00-from-c-to-csharp/00-02-variables-types-operators/README.md)
+- [00.3 - Control Flow: if/else, Loops, switch](lessons/00-from-c-to-csharp/00-03-control-flow/README.md)
+- [00.4 - Methods & Parameters: ref/out vs C Pointers](lessons/00-from-c-to-csharp/00-04-methods-parameters/README.md)
+- [00.5 - Arrays & Strings: the Safety Nets You Didn't Have in C](lessons/00-from-c-to-csharp/00-05-arrays-strings/README.md)
+- [00.6 - Classes & Objects: From C structs to C# Objects](lessons/00-from-c-to-csharp/00-06-classes-objects/README.md)
+- [00.7 - Intro to Collections: List<T> as a Safer, Growable Array](lessons/00-from-c-to-csharp/00-07-collections-intro/README.md)
 
 ## Module 1 — Foundations
-- [01 - Value Types vs Reference Types](lessons/01-value-vs-reference-types/README.md)
-- [01a - Records and Immutability](lessons/01a-records-and-immutability/README.md)
-- [02 - Nullable Types](lessons/02-nullable-types/README.md)
-- [03 - Boxing and Unboxing](lessons/03-boxing-unboxing/README.md)
-- [04 - Pattern Matching](lessons/04-pattern-matching/README.md)
-- [05 - Expression-Bodied Members](lessons/05-expression-bodied-members/README.md)
+- [01 - Value Types vs Reference Types](lessons/01-foundations/01-value-vs-reference-types/README.md)
+- [01a - Records and Immutability](lessons/01-foundations/01a-records-and-immutability/README.md)
+- [02 - Nullable Types](lessons/01-foundations/02-nullable-types/README.md)
+- [03 - Boxing and Unboxing](lessons/01-foundations/03-boxing-unboxing/README.md)
+- [04 - Pattern Matching](lessons/01-foundations/04-pattern-matching/README.md)
+- [05 - Expression-Bodied Members](lessons/01-foundations/05-expression-bodied-members/README.md)
 
 ## Module 2 — OOP Deep Dive
-- [06 - Encapsulation](lessons/06-encapsulation/README.md)
-- [07 - Inheritance vs Composition](lessons/07-inheritance-vs-composition/README.md)
-- [08 - Polymorphism & Liskov Substitution](lessons/08-polymorphism-lsp/README.md)
-- [09 - Interfaces vs Abstract Classes](lessons/09-interfaces-vs-abstract-classes/README.md)
-- [10 - SOLID Principles](lessons/10-solid-principles/README.md)
+- [06 - Encapsulation](lessons/02-oop-deep-dive/06-encapsulation/README.md)
+- [07 - Inheritance vs Composition](lessons/02-oop-deep-dive/07-inheritance-vs-composition/README.md)
+- [08 - Polymorphism & Liskov Substitution](lessons/02-oop-deep-dive/08-polymorphism-lsp/README.md)
+- [09 - Interfaces vs Abstract Classes](lessons/02-oop-deep-dive/09-interfaces-vs-abstract-classes/README.md)
+- [10 - SOLID Principles](lessons/02-oop-deep-dive/10-solid-principles/README.md)
 
 ## Module 3 — Generics, Collections, LINQ
-- [11 - Generics](lessons/11-generics/README.md)
-- [12 - Choosing the Right Collection](lessons/12-choosing-collections/README.md)
-- [13 - LINQ & Deferred Execution](lessons/13-linq-deferred-execution/README.md)
-- [14 - IQueryable vs IEnumerable](lessons/14-iqueryable-vs-ienumerable/README.md)
+- [11 - Generics](lessons/03-generics-collections-linq/11-generics/README.md)
+- [12 - Choosing the Right Collection](lessons/03-generics-collections-linq/12-choosing-collections/README.md)
+- [13 - LINQ & Deferred Execution](lessons/03-generics-collections-linq/13-linq-deferred-execution/README.md)
+- [14 - IQueryable vs IEnumerable](lessons/03-generics-collections-linq/14-iqueryable-vs-ienumerable/README.md)
 
 ## Module 4 — Delegates, Errors, Resources
-- [15 - Delegates, Func/Action, Events](lessons/15-delegates-events/README.md)
-- [16 - Exception Handling Deep Dive](lessons/16-exception-handling/README.md)
-- [17 - IDisposable & Memory Management](lessons/17-idisposable-memory/README.md)
+- [15 - Delegates, Func/Action, Events](lessons/04-delegates-errors-resources/15-delegates-events/README.md)
+- [16 - Exception Handling Deep Dive](lessons/04-delegates-errors-resources/16-exception-handling/README.md)
+- [17 - IDisposable & Memory Management](lessons/04-delegates-errors-resources/17-idisposable-memory/README.md)
 
 ## Module 5 — Async & Concurrency Deep Dive
-- [18 - async/await Fundamentals](lessons/18-async-await-fundamentals/README.md)
-- [19 - Deadlocks, Task Types, Cancellation, async void](lessons/19-async-deadlocks-cancellation/README.md)
-- [19a - Multithreading & Locks](lessons/19a-multithreading-and-locks/README.md)
-- [19b - unsafe Pointers & Span\<T\>](lessons/19b-unsafe-pointers-and-span/README.md)
+- [18 - async/await Fundamentals](lessons/05-async-concurrency/18-async-await-fundamentals/README.md)
+- [19 - Deadlocks, Task Types, Cancellation, async void](lessons/05-async-concurrency/19-async-deadlocks-cancellation/README.md)
+- [19a - Multithreading & Locks](lessons/05-async-concurrency/19a-multithreading-and-locks/README.md)
+- [19b - unsafe Pointers & Span\<T\>](lessons/05-async-concurrency/19b-unsafe-pointers-and-span/README.md)
 
 ## Module 6 — Networking & I/O
-- [20 - HttpClient Done Right](lessons/20-httpclient/README.md)
-- [21 - Raw Sockets & TCP](lessons/21-raw-sockets-tcp/README.md)
-- [22 - File I/O](lessons/22-file-io/README.md)
-- [22a - Secure Coding Fundamentals in C#](lessons/22a-secure-coding-fundamentals/README.md)
+- [20 - HttpClient Done Right](lessons/06-networking-io/20-httpclient/README.md)
+- [21 - Raw Sockets & TCP](lessons/06-networking-io/21-raw-sockets-tcp/README.md)
+- [22 - File I/O](lessons/06-networking-io/22-file-io/README.md)
+- [22a - Secure Coding Fundamentals in C#](lessons/06-networking-io/22a-secure-coding-fundamentals/README.md)
 
 ## Capstone
-- [23 - Concurrent URL Health Checker](lessons/23-capstone-url-health-checker/README.md)
+- [23 - Concurrent URL Health Checker](lessons/capstone/23-capstone-url-health-checker/README.md)
 
 ## Module 7 — Real-World Engineering Practices
-- [24 - Testing with xUnit](lessons/24-testing-with-xunit/README.md)
-- [25 - Dependency Injection & Configuration](lessons/25-dependency-injection-and-configuration/README.md)
-- [26 - Solution & Project Structure](lessons/26-solution-and-project-structure/README.md)
+- [24 - Testing with xUnit](lessons/07-real-world-engineering/24-testing-with-xunit/README.md)
+- [25 - Dependency Injection & Configuration](lessons/07-real-world-engineering/25-dependency-injection-and-configuration/README.md)
+- [26 - Solution & Project Structure](lessons/07-real-world-engineering/26-solution-and-project-structure/README.md)
 
 ## Projects — Build Real Things
 Six standalone, cybersecurity-themed projects that force you to combine
